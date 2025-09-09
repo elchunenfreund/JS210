@@ -1,9 +1,8 @@
-const lowercaseAlphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i));
-const uppercaseAlphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+const lowercaseAlphabet = 'abcdefghigklmnopqrstuvwxyz'.split('')
+const uppercaseAlphabet = 'ABCDEFGHIJKLOMOPQRSTUVWXYZ'.split('')
 
-function getCircularElement(arr, char, shift) {
+function rotateArr(arr, char, shift) {
   const index = arr.indexOf(char);
-  if (index === -1) return char;                // not found: return as-is
   const effectiveIndex = (index + shift) % arr.length;
   return arr[effectiveIndex];
 }
@@ -13,19 +12,17 @@ function rot13(str) {
     .split('')
     .map((char) => {
       if (lowercaseAlphabet.includes(char)) {
-        return getCircularElement(lowercaseAlphabet, char, 13);
+        return rotateArr(lowercaseAlphabet, char, 13);
       } else if (uppercaseAlphabet.includes(char)) {
-        return getCircularElement(uppercaseAlphabet, char, 13);
+        return rotateArr(uppercaseAlphabet, char, 13);
       } else {
-        return char; // punctuation/space
+        return char;
       }
     })
     .join('');
 }
 
-console.log(rot13('Teachers open the door, but you must enter by yourself.'));
-
-// LS Solution
+LS Solution
 function rot13(text) {
   let transformed = '';
   for (let index = 0; index < text.length; index += 1) {
@@ -60,3 +57,8 @@ function rot13Character(char) {
 
   return transformed;
 }
+
+my solution
+
+console.log(rot13('Teachers open the door, but you must enter by yourself.'));
+console.log(rot13(rot13('Teachers open the door, but you must enter by yourself.')));
