@@ -52,21 +52,57 @@ function slice(arr, start, end) {
   return result
 }
 
-function splice(arr, start, number) {
-  let result = []
-  for(let counter = 0; counter < number; counter++) {
-    let current_index = start + counter
+function splice(arr, start, number) { 
+  let result = [] 
+  for(let counter = 0; counter < number; counter++) { 
+    let current_index = start + counter 
     push(result, arr[current_index])
-
+    arr[current_index] = ''
   }
 
-  for(let counter = start; counter < start + number; counter++) {
-    let current_index = start + counter
-    arr[current_index] = arr[current_index + 1];
+  for(let counter = arr.length; counter >= start; counter -= 1) { 
+    if(arr[counter] === '') { 
+      arr[counter] = arr[counter + 1] 
+      pop(arr) 
+    } 
+    } 
+    return result 
   }
-    return result
+
+  // LS Solution
+  function splice(array, begin, number) {
+  let removedValues = [];
+  for (let index = begin; index < array.length; index += 1) {
+    if (index < begin + number) {
+      push(removedValues, array[index]);
+    }
+
+    array[index] = array[index + number];
+  }
+
+  array.length = array.length - removedValues.length;
+  return removedValues;
 }
 
-let count = [1, 2, 3, 4, 5, 6, 7, 8];
-console.log(splice(count, 2, 5));
-console.log(count)
+function concat(arr1, arr2) {
+  result = []
+  for(let int = 0; int < arr1.length; int++) {
+    push(result, arr1[int])
+  }
+
+  for(let int = 0; int < arr2.length; int++) {
+    push(result, arr2[int])
+  }
+  return result
+}
+
+function join(arr, sep) {
+  result = ''
+  for(let index = 0; index < arr.length - 1; index++) {
+    result += String(arr[index]) + sep
+  }
+  result += String(arr[arr.length - 1])
+  return result
+}
+console.log(join(['bri', 'tru', 'wha'], 'ck '));
+console.log(join([1, 2, 3], ' and '))       // [ 1, 2, 3, 4, 5, 6 ])
