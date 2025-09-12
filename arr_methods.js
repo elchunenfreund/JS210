@@ -79,25 +79,38 @@ function slice(arr, begin, end) {
 function splice(arr, start, deleteCount, ...obj) {
   let result = []
   if (start > arr.length) {
-    begin = arr.length
+    start = arr.length
   } if (deleteCount > arr.length - start) {
     deleteCount = arr.length - start
   }
+  
+  let tailObj = arr.slice(start + deleteCount)
 
   // delete count
-  for(let ind = start; ind <= deleteCount; int++) {
-    for(let index = ind; index < arr.length; index++) {
-      arr[index] = arr[index + 1]
-    }
-    result.push(arr.pop)
+  result = result.concat(arr.slice(start, start + deleteCount))
+  arr.length = start
 
-    // add abjects
-    for(let obj = start; obj < obj.length; obj++) {
-      for(let int = arr.length; int > 0; int -= 1) {
-        arr[int] = arr[int - 1]
-      }
-      arr[obj] = obj.shift
-    }
-    return result
+  addArr = obj.concat(tailObj)
+  // add new abjects
+  let objInd = 0
+  for(ind = start; ind < start + addArr.length; ind++) {
+    arr[ind] = addArr[objInd]
+    objInd += 1
   }
+  arr.length = start + addArr.length
+  return result
+}
+
+function areArraysEqual(array1, array2) {
+  if (array1.length !== array2.length) {
+    return false
+  }
+  array1.sort()
+  array2.sort()
+  for(let ind = 0; ind < array1.length; ind++) {
+    if (array1[ind] !== array2[ind]) {
+      return false
+    }
+  }
+  return true
 }
