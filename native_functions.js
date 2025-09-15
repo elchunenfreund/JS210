@@ -104,5 +104,53 @@ function join(arr, sep) {
   result += String(arr[arr.length - 1])
   return result
 }
-console.log(join(['bri', 'tru', 'wha'], 'ck '));
-console.log(join([1, 2, 3], ' and '))       // [ 1, 2, 3, 4, 5, 6 ])
+
+function stringToInteger(str) {
+  DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,}
+  result = 0
+  strArr = str.split('')
+  for(let int = 0; int < strArr.length; int++) {
+    result = 10 * result + DIGITS[strArr[int]]
+  }
+  return result
+}
+
+function stringToSignedInteger(str) {
+  DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,}
+  result = 0
+  strArr = str.split('')
+  let sign = 1
+  if (strArr[0] === '-') {
+      strArr.shift()
+      sign = -1
+    }
+  for(let int = 0; int < strArr.length; int++) {
+    result = 10 * result + DIGITS[strArr[int]]
+  }
+  return result * sign
+}
+
+function integerToString(int) {
+  let result = ''
+  const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  while (int > 0) {
+    let remainder = int % 10
+    result = DIGITS[remainder] + result
+    int = Math.floor(int / 10)
+  }
+  return result
+}
+
+function signedIntegerToString(int) {
+  if (int === 0) {
+    return '0'
+  }
+
+  let sign = int < 0 ? '-' : '+'
+  let result = sign + integerToString(Math.abs(int))
+  return result
+}
+
+signedIntegerToString(4321);      // "+4321"
+signedIntegerToString(-123);      // "-123"
+signedIntegerToString(0);         // "0"
