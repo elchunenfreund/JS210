@@ -1,15 +1,54 @@
 function isPalindrome(str) {
-  let rightStr = str.slice(0, str.length / 2)
-  let leftStr = str.slice(str.length / 2)
-  if (leftStr.length > rightStr.length) {
-    leftStr = leftStr.slice(1)
+  let leftStr = str.slice(0, str.length / 2)
+  let rightStr = str.slice(str.length / 2)
+  if (rightStr.length > leftStr.length) {
+    rightStr = rightStr.slice(1)
   }
 
-  return rightStr === leftStr.split('').reverse().join('')
+  return leftStr === rightStr.split('').reverse().join('')
 }
 
+function isRealPalindrome(str) {
+  let stripedStr = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')
+  return isPalindrome(stripedStr)
+}
 
-console.log(isPalindrome('356653'));
-console.log(isPalindrome('madam'));
-console.log(isPalindrome('Madam'));
-console.log(isPalindrome("madam i'm adam"));
+function isPalindromicNumber(int) {
+  return isPalindrome(String(int))
+}
+
+isPalindromicNumber(34543);        // true
+isPalindromicNumber(123210);       // false
+isPalindromicNumber(22);           // true
+isPalindromicNumber(5);            // true
+
+// LS Solution
+function isPalindrome(string) {
+  return string === string.split('').reverse().join('');
+}
+
+function isRealPalindrome(string) {
+  string = removeNonLetterNumbers(string.toLowerCase());
+  return isPalindrome(string);
+}
+
+function removeNonLetterNumbers(string) {
+  let result = '';
+
+  for (let i = 0; i < string.length; i += 1) {
+    if (isLetter(string[i]) || isNumber(string[i])) {
+      result += string[i];
+    }
+  }
+
+  return result;
+}
+
+function isLetter(char) {
+  return char >= 'a' && char <= 'z';
+}
+
+function isNumber(char) {
+ return char >= '0' && char <= '9';
+}
+
