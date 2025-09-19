@@ -1,10 +1,11 @@
 function wantToVisit(museum, city) {
   return museum.includes('Computer')
       || museum.includes('Science')
-      || ( museum.includes('Modern')
+      || (
+        museum.includes('Modern')
         && museum.includes('Art')
         && (museum.includes('Andy Warhol')
-          || city === 'Amsterdam')
+        || city === 'Amsterdam')
       );
 }
 
