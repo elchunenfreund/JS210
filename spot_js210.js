@@ -4,7 +4,7 @@ const generateArr = (startNum, endNum) => {
   result = []
   for(let i = startNum; i <= endNum; i++) {
     result.push(i)
-  } 
+  }
   return result
 }
 
@@ -55,10 +55,45 @@ const countSubstr = (str, sub) => {
 }
 
 const countEle = (arr, ele) => {
-  
+
 }
-countEle(['name', 'year', 'age', 'name'], 'name'); // => 2
-countEle([1,2,3,4,5,1,2,3,4], 2); //=> 2
+
+const countDuplic = (str) => {
+  let result = {}
+  let strArr = str.split('').forEach((word) => {
+    if(result[word]) {
+      result[word] += 1
+    } else {
+      result[word] = 1
+    }
+  })
+
+  let numArr = Object.values(result).filter((num) => num === 2);
+  return numArr.length
+}
+
+let appearTwice = (arr) => {
+  let arrObj = {}
+  arr.forEach((ele) => {
+    if (arrObj[ele]) {
+      arrObj[ele] += 1
+    } else {
+      arrObj[ele] = 1
+    }
+  })
+
+  result = []
+
+  for(obj in arrObj) {
+    if (arrObj[obj] === 2) {
+      result.push(obj)
+    }
+  }
+
+  return result
+}
+
+
 
 
 
